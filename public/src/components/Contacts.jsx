@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import Logout from "./Logout";
 import Logo from '../assets/logo.png';
 import styled from "styled-components";
 
@@ -26,11 +27,17 @@ export default function Contacts({contacts, changeChat})
     return(
         <>
             <Container>
-                <div className="brand">
-                    <img src={Logo} alt="logo" />
-                    <h3>ChatApp</h3>
+                <div className="current-user">
+                    <div className="avatar">
+                        <img src={`data:image/svg+xml;base64,${currentUserImage}`} alt="avatar" />
+                        <div className="username">
+                            <h2>{currentUserName}</h2>
+                        </div>
+                    </div>
+                    <Logout />
                 </div>
                 <div className="contacts">
+                  <input type='text' placeholder="🔍︎ Find a user" />
                     {contacts.map((contact, index) => {
                         return (
                             <div
@@ -49,37 +56,18 @@ export default function Contacts({contacts, changeChat})
                         );
                     })}
                 </div>
-                <div className="current-user">
-                    <div className="avatar">
-                        <img src={`data:image/svg+xml;base64,${currentUserImage}`} alt="avatar" />
-                    </div>
-                    <div className="username">
-                        <h2>{currentUserName}</h2>
-                    </div>
-                </div>
+                
             </Container>
         </>
     )
 }
 
 const Container = styled.div`
-display: grid;
+  display: grid;
   grid-template-rows: 10% 75% 15%;
   overflow: hidden;
   background-color: #05194F;
-  .brand {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    justify-content: center;
-    img {
-      height: 2rem;
-    }
-    h3 {
-      color: white;
-      text-transform: uppercase;
-    }
-  }
+  
   .contacts {
     display: flex;
     flex-direction: column;
@@ -89,10 +77,26 @@ display: grid;
     &::-webkit-scrollbar {
       width: 0.2rem;
       &-thumb {
-        background-color: #ffffff39;
+        background-color: #6ea1ff39;
         width: 0.1rem;
         border-radius: 1rem;
       }
+    }
+    input {
+      width: 100%;
+      height: 10%;
+      background-color: #ffffff34;
+      opacity: .5;
+      color: #fff;
+      border: none;
+      padding-left: 1rem;
+      font-size: 1.2rem;
+        &::selection {
+          background-color: #9a86f3;
+        }
+        &:focus {
+          outline: none;
+        }
     }
     .contact {
       background-color: #ffffff34;
@@ -125,18 +129,21 @@ display: grid;
   .current-user {
     background-color: #0A348F;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    gap: 2rem;
     .avatar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
       img {
-        height: 4rem;
+        height: 3rem;
         max-inline-size: 100%;
       }
-    }
-    .username {
-      h2 {
-        color: white;
+      .username {
+        h2 {
+          color: white;
+        }
       }
     }
     @media screen and (min-width: 720px) and (max-width: 1080px) {

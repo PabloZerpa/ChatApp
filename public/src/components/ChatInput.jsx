@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { HiPaperAirplane } from "react-icons/hi";
 import { FaSmileWink } from "react-icons/fa";
+import { BsPaperclip } from "react-icons/bs";
 import styled from "styled-components";
 import Picker from "emoji-picker-react";
 
@@ -41,6 +42,10 @@ export default function ChatInput({handleSendMsg})
             </div>
             <form className="input-container" onSubmit={(e)=>sendChat(e)} >
                 <input type="text" placeholder="type your message here" value={msg} onChange={(e)=>setMsg(e.target.value)} />
+                <div className="clip">
+                  <label for="file" class="file"><BsPaperclip /></label>
+                  <input id="file" type="file" />
+                </div>
                 <button className="submit">
                     <HiPaperAirplane />
                 </button>
@@ -121,6 +126,20 @@ padding: 32px 48px;
     }
     &:focus {
       outline: none;
+    }
+  }
+  .clip
+  {
+    font-size: 28px;
+    margin-top: 8px;
+
+    .file
+    {
+      cursor: pointer;
+    }
+
+    .file + [type='file']{
+      display:none;
     }
   }
   button {

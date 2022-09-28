@@ -2,9 +2,12 @@ import React, { useState, useEffect, useRef } from "react";
 import { sendMessageRoute, recieveMessageRoute } from "../utils/APIRoutes";
 import axios from "axios";
 import styled from "styled-components";
-import Logout from "./Logout";
 import ChatInput from "./ChatInput";
 import { v4 as uuidv4 } from "uuid";
+import { BsFillCameraVideoFill } from "react-icons/bs";
+import { BsThreeDots } from "react-icons/bs"
+import { FaUserPlus } from "react-icons/fa";
+
 
 export default function ChatContainer({ currentChat, currentUser, socket })
 {
@@ -77,7 +80,12 @@ export default function ChatContainer({ currentChat, currentUser, socket })
             <h3>{currentChat.username}</h3>
           </div>
         </div>
-        <Logout />
+        <div className="options">
+          <FaUserPlus />
+          <BsFillCameraVideoFill />
+          <BsThreeDots />
+          
+        </div>
       </div>
       <div className="chat-messages">
         {messages.map((message) => {
@@ -98,7 +106,7 @@ export default function ChatContainer({ currentChat, currentUser, socket })
 }
 
 const Container = styled.div`
-display: grid;
+  display: grid;
   grid-template-rows: 10% 74.4% 10%;
   gap: 0.1rem;
   overflow: hidden;
@@ -110,6 +118,7 @@ display: grid;
     justify-content: space-between;
     align-items: center;
     padding: 0 2rem;
+    background-color: #05194F;
     .user-details {
       display: flex;
       align-items: center;
@@ -123,6 +132,17 @@ display: grid;
         h3 {
           color: white;
         }
+      }
+    }
+    .options
+    {
+      display: flex;
+      font-size: 28px;
+      gap: 32px;
+      color: #fff;
+
+      *{
+        cursor: pointer;
       }
     }
   }
